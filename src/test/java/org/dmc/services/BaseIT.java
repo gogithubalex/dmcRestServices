@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Value;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.dmc.services.config.Application;
+import org.dmc.services.logging.ServiceLogger;
 import org.junit.Before;
 
 import com.jayway.restassured.RestAssured;

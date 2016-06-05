@@ -7,14 +7,14 @@ import static org.junit.Assert.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import org.dmc.services.data.entities.legacy.User;
+import org.dmc.services.data.entities.legacy.UserMessages;
+import org.dmc.services.data.entities.legacy.UserNotifications;
+import org.dmc.services.data.entities.legacy.UserOnboarding;
+import org.dmc.services.data.entities.legacy.UserRunningServices;
+import org.dmc.services.logging.ServiceLogger;
 import org.dmc.services.utility.TestUserUtil;
 import org.json.JSONObject;
-
-import org.dmc.services.users.User;
-import org.dmc.services.users.UserOnboarding;
-import org.dmc.services.users.UserNotifications;
-import org.dmc.services.users.UserRunningServices;
-import org.dmc.services.users.UserMessages;
 
 import static com.jayway.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 

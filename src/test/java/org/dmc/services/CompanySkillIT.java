@@ -1,19 +1,23 @@
 package org.dmc.services;
 
-import org.dmc.services.company.CompanyDao;
-import org.dmc.services.company.Company;
-import org.dmc.services.sharedattributes.FeatureImage;
-import org.dmc.services.utility.TestUserUtil;
-import org.json.JSONObject;
-import org.junit.*;
-import org.junit.Test;
+import static com.jayway.restassured.RestAssured.given;
+import static com.jayway.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+import static org.junit.Assert.assertTrue;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import static com.jayway.restassured.RestAssured.given;
-import static com.jayway.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
-import static org.junit.Assert.assertTrue;
+import org.dmc.services.data.config.DBConnector;
+import org.dmc.services.data.entities.legacy.Company;
+import org.dmc.services.data.models.legacy.FeatureImage;
+import org.dmc.services.data.repositories.legacy.CompanyDao;
+import org.dmc.services.logging.ServiceLogger;
+import org.dmc.services.utility.TestUserUtil;
+import org.json.JSONObject;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

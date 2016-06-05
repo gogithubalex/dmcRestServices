@@ -4,6 +4,7 @@ import static com.jayway.restassured.RestAssured.*;
 import static com.jayway.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.junit.Assert.*;
 
+import org.dmc.services.logging.ServiceLogger;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 

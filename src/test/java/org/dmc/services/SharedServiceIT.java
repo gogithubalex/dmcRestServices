@@ -1,8 +1,9 @@
 package org.dmc.services;
 
-import org.dmc.services.services.PostSharedService;
-import org.dmc.services.services.SharedService;
-import org.dmc.services.services.SharedServicesController;
+import org.dmc.services.data.entities.legacy.PostSharedService;
+import org.dmc.services.data.entities.legacy.SharedService;
+import org.dmc.services.logging.ServiceLogger;
+import org.dmc.services.web.controllers.legacy.SharedServicesController;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 

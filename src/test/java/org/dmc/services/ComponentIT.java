@@ -1,6 +1,6 @@
 package org.dmc.services;
 
-import org.dmc.services.components.Component;
+import org.dmc.services.data.entities.legacy.Component;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 

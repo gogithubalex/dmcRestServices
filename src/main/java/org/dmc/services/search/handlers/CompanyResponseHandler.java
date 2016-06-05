@@ -3,8 +3,9 @@ package org.dmc.services.search.handlers;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
-import org.dmc.services.company.Company;
-import org.dmc.services.company.CompanyDao;
+import org.dmc.services.data.entities.legacy.Company;
+import org.dmc.services.data.repositories.legacy.CompanyDao;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;

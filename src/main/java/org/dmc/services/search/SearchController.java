@@ -1,11 +1,11 @@
 package org.dmc.services.search;
 
 
-import org.dmc.services.company.Company;
-import org.dmc.services.components.Component;
-import org.dmc.services.projects.Project;
-import org.dmc.services.services.Service;
-import org.dmc.services.users.User;
+import org.dmc.services.data.entities.legacy.Company;
+import org.dmc.services.data.entities.legacy.Component;
+import org.dmc.services.data.entities.legacy.Project;
+import org.dmc.services.data.entities.legacy.Service;
+import org.dmc.services.data.entities.legacy.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

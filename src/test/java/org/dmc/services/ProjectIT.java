@@ -25,14 +25,14 @@ import static com.jayway.restassured.module.jsv.JsonSchemaValidator.matchesJsonS
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
-import org.dmc.services.ServiceLogger;
-import org.dmc.services.discussions.Discussion;
-import org.dmc.services.projects.ProjectCreateRequest;
-import org.dmc.services.projects.Project;
-import org.dmc.services.projects.ProjectJoinRequest;
-import org.dmc.services.projects.PostProjectJoinRequest;
-import org.dmc.services.projects.PostProjectTag;
-import org.dmc.services.projects.ProjectMember;
+import org.dmc.services.data.entities.legacy.Discussion;
+import org.dmc.services.data.entities.legacy.PostProjectJoinRequest;
+import org.dmc.services.data.entities.legacy.PostProjectTag;
+import org.dmc.services.data.entities.legacy.Project;
+import org.dmc.services.data.entities.legacy.ProjectCreateRequest;
+import org.dmc.services.data.entities.legacy.ProjectJoinRequest;
+import org.dmc.services.data.entities.legacy.ProjectMember;
+import org.dmc.services.logging.ServiceLogger;
 
 //@Ignore
 public class ProjectIT extends BaseIT {

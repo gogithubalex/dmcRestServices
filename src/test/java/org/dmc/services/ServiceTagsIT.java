@@ -3,8 +3,9 @@ package org.dmc.services;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.util.JSONPObject;
-import org.dmc.services.company.Company;
-import org.dmc.services.services.ServiceTag;
+
+import org.dmc.services.data.entities.legacy.Company;
+import org.dmc.services.data.entities.legacy.ServiceTag;
 import org.dmc.services.utility.TestUserUtil;
 import org.json.JSONObject;
 import org.junit.Test;

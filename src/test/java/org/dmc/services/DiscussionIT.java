@@ -1,13 +1,13 @@
 package org.dmc.services;
 
-import org.dmc.services.discussions.Discussion;
-import org.dmc.services.discussions.DiscussionController;
-import org.dmc.services.discussions.FollowingIndividualDiscussion;
-import org.dmc.services.discussions.IndividualDiscussion;
-import org.dmc.services.discussions.IndividualDiscussionComment;
-import org.dmc.services.discussions.IndividualDiscussionCommentFlagged;
-import org.dmc.services.discussions.IndividualDiscussionCommentHelpful;
-import org.dmc.services.discussions.IndividualDiscussionTag;
+import org.dmc.services.data.entities.legacy.Discussion;
+import org.dmc.services.data.entities.legacy.FollowingIndividualDiscussion;
+import org.dmc.services.data.entities.legacy.IndividualDiscussion;
+import org.dmc.services.data.entities.legacy.IndividualDiscussionComment;
+import org.dmc.services.data.entities.legacy.IndividualDiscussionCommentFlagged;
+import org.dmc.services.data.entities.legacy.IndividualDiscussionCommentHelpful;
+import org.dmc.services.data.entities.legacy.IndividualDiscussionTag;
+import org.dmc.services.web.controllers.legacy.DiscussionController;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;

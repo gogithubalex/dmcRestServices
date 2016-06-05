@@ -3,9 +3,7 @@ package org.dmc.services.search.handlers;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
-//import org.dmc.services.ServiceLogger;
-//import org.dmc.services.search.SearchImpl;
-import org.dmc.services.services.Service;
+import org.dmc.services.data.entities.legacy.Service;
 
 import java.util.ArrayList;
 import java.util.Iterator;

@@ -17,10 +17,10 @@ import static com.jayway.restassured.module.jsv.JsonSchemaValidator.matchesJsonS
 
 import org.dmc.services.BaseIT;
 import org.dmc.services.utility.TestUserUtil;
-import org.dmc.services.accounts.UserAccount;
-import org.dmc.services.accounts.UserAccountServer;
-import org.dmc.services.users.User;
-import org.dmc.services.users.UserDao;
+import org.dmc.services.data.entities.legacy.User;
+import org.dmc.services.data.entities.legacy.UserAccount;
+import org.dmc.services.data.entities.legacy.UserAccountServer;
+import org.dmc.services.data.repositories.legacy.UserDao;
 
 public class AccountServerIT extends BaseIT {
 	private final String logTag = AccountsIT.class.getName();

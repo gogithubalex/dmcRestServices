@@ -1,31 +1,10 @@
 package org.dmc.services;
 
-import org.dmc.services.services.PostServiceInputPosition;
-import org.dmc.services.services.PostUpdateDomeInterface;
-import org.dmc.services.services.Service;
-import org.dmc.services.services.ServiceDao;
-import org.dmc.services.services.ServiceInputPosition;
-import org.dmc.services.services.ServiceSpecialSpecifications;
-import org.dmc.services.services.ServiceSpecifications;
-import org.dmc.services.services.RunStats;
-import org.dmc.services.services.UsageStats;
-import org.dmc.services.services.specifications.ArraySpecifications;
-import org.dmc.services.company.CompanyVideo;
-import org.dmc.services.services.*;
-import org.dmc.services.utility.TestUserUtil;
-import org.junit.Test;
-
-import static org.junit.Assert.*;
-
-import org.springframework.http.HttpStatus;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jayway.restassured.response.ValidatableResponse;
-
-import static com.jayway.restassured.RestAssured.*;
+import static com.jayway.restassured.RestAssured.expect;
+import static com.jayway.restassured.RestAssured.given;
+import static com.jayway.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -34,7 +13,26 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Random;
 
-import static com.jayway.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+import org.dmc.services.data.entities.legacy.GetDomeInterface;
+import org.dmc.services.data.entities.legacy.PostServiceInputPosition;
+import org.dmc.services.data.entities.legacy.PostUpdateDomeInterface;
+import org.dmc.services.data.entities.legacy.RunStats;
+import org.dmc.services.data.entities.legacy.Service;
+import org.dmc.services.data.entities.legacy.ServiceInputPosition;
+import org.dmc.services.data.entities.legacy.ServiceSpecialSpecifications;
+import org.dmc.services.data.entities.legacy.ServiceSpecifications;
+import org.dmc.services.data.entities.legacy.ServiceTag;
+import org.dmc.services.data.entities.legacy.UsageStats;
+import org.dmc.services.logging.ServiceLogger;
+import org.dmc.services.utility.TestUserUtil;
+import org.junit.Test;
+import org.springframework.http.HttpStatus;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jayway.restassured.response.ValidatableResponse;
 
 
 public class ServiceIT extends BaseIT {

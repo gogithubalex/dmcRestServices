@@ -1,39 +1,34 @@
 package org.dmc.services;
 
-import static org.junit.Assert.*;
+import static com.jayway.restassured.RestAssured.given;
+import static com.jayway.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+import static org.junit.Assert.assertTrue;
 
-import java.util.UUID;
+import java.util.ArrayList;
 
-import org.dmc.services.users.User;
-import org.json.JSONObject;
-import org.json.JSONArray;
-import org.junit.*;
-import org.dmc.services.company.Company;
-import org.dmc.services.company.CompanyImage;
-import org.dmc.services.company.CompanyReview;
-import org.dmc.services.company.CompanyReviewFlagged;
-import org.dmc.services.company.CompanyReviewHelpful;
-import org.dmc.services.company.CompanySkill;
-import org.dmc.services.company.CompanySkillImage;
-import org.dmc.services.company.CompanyVideo;
+import org.dmc.services.data.entities.legacy.Company;
+import org.dmc.services.data.entities.legacy.CompanyImage;
+import org.dmc.services.data.entities.legacy.CompanyReview;
+import org.dmc.services.data.entities.legacy.CompanyReviewFlagged;
+import org.dmc.services.data.entities.legacy.CompanyReviewHelpful;
+import org.dmc.services.data.entities.legacy.CompanySkillImage;
+import org.dmc.services.data.entities.legacy.CompanyVideo;
+import org.dmc.services.data.entities.legacy.User;
+import org.dmc.services.data.models.legacy.FeatureImage;
+import org.dmc.services.logging.ServiceLogger;
 import org.dmc.services.utility.TestUserUtil;
-
-import org.dmc.services.sharedattributes.FeatureImage;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.http.HttpStatus;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-
-import org.junit.Test;
-import org.springframework.http.HttpStatus;
-
-import java.util.ArrayList;
-
-import static com.jayway.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.*;
-import static com.jayway.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 public class CompanyIT extends BaseIT {
 

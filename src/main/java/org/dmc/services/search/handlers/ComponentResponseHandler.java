@@ -3,8 +3,8 @@ package org.dmc.services.search.handlers;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
-import org.dmc.services.components.Component;
-import org.dmc.services.components.ComponentDao;
+import org.dmc.services.data.entities.legacy.Component;
+import org.dmc.services.data.repositories.legacy.ComponentDao;
 
 import java.util.ArrayList;
 import java.util.Iterator;
