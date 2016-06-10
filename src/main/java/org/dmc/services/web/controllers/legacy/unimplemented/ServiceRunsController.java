@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import static org.springframework.http.MediaType.*;
 
-import org.dmc.services.data.entities.legacy.GetServiceRun;
-import org.dmc.services.data.entities.legacy.PostServiceRun;
-import org.dmc.services.data.entities.legacy.UpdateServiceRun;
+import org.dmc.services.data.entities.legacy.unimplemented.GetServiceRun;
+import org.dmc.services.data.entities.legacy.unimplemented.PostServiceRun;
+import org.dmc.services.data.entities.legacy.unimplemented.UpdateServiceRun;
 
 @Controller
 @RequestMapping(value = "/service_runs", produces = {APPLICATION_JSON_VALUE})

@@ -4,9 +4,9 @@ package org.dmc.services.web.controllers.legacy.unimplemented;
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.dmc.services.data.entities.legacy.PostServiceInputPosition;
-import org.dmc.services.data.entities.legacy.ServiceInputPosition;
-import org.dmc.services.data.entities.legacy.ServiceInputsPositions;
+import org.dmc.services.data.entities.legacy.unimplemented.PostServiceInputPosition;
+import org.dmc.services.data.entities.legacy.unimplemented.ServiceInputPosition;
+import org.dmc.services.data.entities.legacy.unimplemented.ServiceInputsPositions;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

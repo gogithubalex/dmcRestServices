@@ -6,13 +6,13 @@ import java.util.List;
 
 import javax.xml.ws.http.HTTPException;
 
-import org.dmc.services.data.entities.legacy.AccountNotificationSetting;
-import org.dmc.services.data.entities.legacy.FollowingCompany;
-import org.dmc.services.data.entities.legacy.FollowingIndividualDiscussion;
-import org.dmc.services.data.entities.legacy.FollowingMemeber;
-import org.dmc.services.data.entities.legacy.InlineResponse200;
 import org.dmc.services.data.entities.legacy.UserAccount;
 import org.dmc.services.data.entities.legacy.UserAccountServer;
+import org.dmc.services.data.entities.legacy.unimplemented.AccountNotificationSetting;
+import org.dmc.services.data.entities.legacy.unimplemented.FollowingCompany;
+import org.dmc.services.data.entities.legacy.unimplemented.FollowingIndividualDiscussion;
+import org.dmc.services.data.entities.legacy.unimplemented.FollowingMemeber;
+import org.dmc.services.data.entities.legacy.unimplemented.InlineResponse200;
 import org.dmc.services.data.repositories.legacy.AccountsDao;
 import org.dmc.services.logging.ServiceLogger;
 import org.springframework.http.HttpStatus;

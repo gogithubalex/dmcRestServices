@@ -1,7 +1,7 @@
 package org.dmc.services.web.controllers.legacy.unimplemented;
 
 
-import org.dmc.services.data.entities.legacy.IndividualDiscussionCommentHelpful;
+import org.dmc.services.data.entities.legacy.unimplemented.IndividualDiscussionCommentHelpful;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

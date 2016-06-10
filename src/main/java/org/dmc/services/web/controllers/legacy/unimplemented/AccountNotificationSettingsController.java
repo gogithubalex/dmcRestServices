@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import static org.springframework.http.MediaType.*;
 
-import org.dmc.services.data.entities.legacy.AccountNotificationSetting;
+import org.dmc.services.data.entities.legacy.unimplemented.AccountNotificationSetting;
 
 @Controller
 @RequestMapping(value = "/account-notification-settings", produces = {APPLICATION_JSON_VALUE})

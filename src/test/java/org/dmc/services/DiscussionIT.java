@@ -1,12 +1,12 @@
 package org.dmc.services;
 
 import org.dmc.services.data.entities.legacy.Discussion;
-import org.dmc.services.data.entities.legacy.FollowingIndividualDiscussion;
-import org.dmc.services.data.entities.legacy.IndividualDiscussion;
-import org.dmc.services.data.entities.legacy.IndividualDiscussionComment;
-import org.dmc.services.data.entities.legacy.IndividualDiscussionCommentFlagged;
-import org.dmc.services.data.entities.legacy.IndividualDiscussionCommentHelpful;
-import org.dmc.services.data.entities.legacy.IndividualDiscussionTag;
+import org.dmc.services.data.entities.legacy.unimplemented.FollowingIndividualDiscussion;
+import org.dmc.services.data.entities.legacy.unimplemented.IndividualDiscussion;
+import org.dmc.services.data.entities.legacy.unimplemented.IndividualDiscussionComment;
+import org.dmc.services.data.entities.legacy.unimplemented.IndividualDiscussionCommentFlagged;
+import org.dmc.services.data.entities.legacy.unimplemented.IndividualDiscussionCommentHelpful;
+import org.dmc.services.data.entities.legacy.unimplemented.IndividualDiscussionTag;
 import org.dmc.services.web.controllers.legacy.DiscussionController;
 import org.junit.Before;
 import org.junit.Test;

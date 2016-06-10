@@ -1,10 +1,10 @@
 package org.dmc.services.web.controllers.legacy;
 
-import org.dmc.services.data.entities.legacy.FollowingMemeber;
 import org.dmc.services.data.entities.legacy.Id;
 import org.dmc.services.data.entities.legacy.Profile;
-import org.dmc.services.data.entities.legacy.ProfileHistory;
-import org.dmc.services.data.entities.legacy.ProfileReview;
+import org.dmc.services.data.entities.legacy.unimplemented.FollowingMemeber;
+import org.dmc.services.data.entities.legacy.unimplemented.ProfileHistory;
+import org.dmc.services.data.entities.legacy.unimplemented.ProfileReview;
 import org.dmc.services.data.repositories.legacy.ProfileDao;
 import org.dmc.services.logging.ServiceLogger;
 import org.springframework.http.HttpStatus;

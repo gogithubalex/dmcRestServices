@@ -1,17 +1,17 @@
 package org.dmc.services.web.controllers.legacy;
 
 import org.dmc.services.data.entities.legacy.Company;
-import org.dmc.services.data.entities.legacy.CompanyHistory;
-import org.dmc.services.data.entities.legacy.CompanyImage;
-import org.dmc.services.data.entities.legacy.CompanyReview;
-import org.dmc.services.data.entities.legacy.CompanySkillImage;
 import org.dmc.services.data.entities.legacy.CompanyVideo;
 import org.dmc.services.data.entities.legacy.Component;
 import org.dmc.services.data.entities.legacy.Id;
-import org.dmc.services.data.entities.legacy.InlineResponse201;
 import org.dmc.services.data.entities.legacy.Service;
-import org.dmc.services.data.entities.legacy.ServiceFeatured;
 import org.dmc.services.data.entities.legacy.User;
+import org.dmc.services.data.entities.legacy.unimplemented.CompanyHistory;
+import org.dmc.services.data.entities.legacy.unimplemented.CompanyImage;
+import org.dmc.services.data.entities.legacy.unimplemented.CompanyReview;
+import org.dmc.services.data.entities.legacy.unimplemented.CompanySkillImage;
+import org.dmc.services.data.entities.legacy.unimplemented.InlineResponse201;
+import org.dmc.services.data.entities.legacy.unimplemented.ServiceFeatured;
 import org.dmc.services.data.repositories.legacy.CompanyDao;
 import org.dmc.services.data.repositories.legacy.CompanySkillDao;
 import org.dmc.services.data.repositories.legacy.CompanyVideoDao;

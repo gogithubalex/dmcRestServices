@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import static org.springframework.http.MediaType.*;
 
-import org.dmc.services.data.entities.legacy.InlineResponse2011;
+import org.dmc.services.data.entities.legacy.unimplemented.InlineResponse2011;
 
 @Controller
 @RequestMapping(value = "/company_featured", produces = {APPLICATION_JSON_VALUE})

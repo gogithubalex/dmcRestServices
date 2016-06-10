@@ -2,7 +2,7 @@ package org.dmc.services;
 
 import static com.jayway.restassured.RestAssured.*;
 
-import org.dmc.services.data.entities.legacy.PostFollowingMemeber;
+import org.dmc.services.data.entities.legacy.unimplemented.PostFollowingMemeber;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 

@@ -14,15 +14,15 @@ import java.util.ListIterator;
 import java.util.Random;
 
 import org.dmc.services.data.entities.legacy.GetDomeInterface;
-import org.dmc.services.data.entities.legacy.PostServiceInputPosition;
 import org.dmc.services.data.entities.legacy.PostUpdateDomeInterface;
 import org.dmc.services.data.entities.legacy.RunStats;
 import org.dmc.services.data.entities.legacy.Service;
-import org.dmc.services.data.entities.legacy.ServiceInputPosition;
 import org.dmc.services.data.entities.legacy.ServiceSpecialSpecifications;
 import org.dmc.services.data.entities.legacy.ServiceSpecifications;
 import org.dmc.services.data.entities.legacy.ServiceTag;
 import org.dmc.services.data.entities.legacy.UsageStats;
+import org.dmc.services.data.entities.legacy.unimplemented.PostServiceInputPosition;
+import org.dmc.services.data.entities.legacy.unimplemented.ServiceInputPosition;
 import org.dmc.services.logging.ServiceLogger;
 import org.dmc.services.utility.TestUserUtil;
 import org.junit.Test;

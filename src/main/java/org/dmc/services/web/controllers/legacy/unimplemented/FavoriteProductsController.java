@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import static org.springframework.http.MediaType.*;
 
-import org.dmc.services.data.entities.legacy.InlineResponse2012;
+import org.dmc.services.data.entities.legacy.unimplemented.InlineResponse2012;
 
 @Controller
 @RequestMapping(value = "/favorite_products", produces = {APPLICATION_JSON_VALUE})

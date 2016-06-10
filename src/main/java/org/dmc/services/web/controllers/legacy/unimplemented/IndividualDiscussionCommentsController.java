@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import static org.springframework.http.MediaType.*;
 
-import org.dmc.services.data.entities.legacy.IndividualDiscussionComment;
+import org.dmc.services.data.entities.legacy.unimplemented.IndividualDiscussionComment;
 
 @Controller
 @RequestMapping(value = "/individual-discussion-comments", produces = {APPLICATION_JSON_VALUE})

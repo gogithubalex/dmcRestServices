@@ -1,8 +1,8 @@
 package org.dmc.services.web.controllers.legacy.unimplemented;
 
 
-import org.dmc.services.data.entities.legacy.ProductReviewHelpful;
-import org.dmc.services.data.entities.legacy.ProfileReviewHelpful;
+import org.dmc.services.data.entities.legacy.unimplemented.ProductReviewHelpful;
+import org.dmc.services.data.entities.legacy.unimplemented.ProfileReviewHelpful;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

@@ -1,7 +1,7 @@
 package org.dmc.services.web.controllers.legacy.unimplemented;
 
 
-import org.dmc.services.data.entities.legacy.UserNotification;
+import org.dmc.services.data.entities.legacy.unimplemented.UserNotification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

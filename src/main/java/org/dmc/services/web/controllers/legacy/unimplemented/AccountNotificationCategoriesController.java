@@ -1,6 +1,6 @@
 package org.dmc.services.web.controllers.legacy.unimplemented;
 
-import org.dmc.services.data.entities.legacy.AccountNotificationCategory;
+import org.dmc.services.data.entities.legacy.unimplemented.AccountNotificationCategory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

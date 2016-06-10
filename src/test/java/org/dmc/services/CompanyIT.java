@@ -7,13 +7,13 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 
 import org.dmc.services.data.entities.legacy.Company;
-import org.dmc.services.data.entities.legacy.CompanyImage;
-import org.dmc.services.data.entities.legacy.CompanyReview;
-import org.dmc.services.data.entities.legacy.CompanyReviewFlagged;
-import org.dmc.services.data.entities.legacy.CompanyReviewHelpful;
-import org.dmc.services.data.entities.legacy.CompanySkillImage;
 import org.dmc.services.data.entities.legacy.CompanyVideo;
 import org.dmc.services.data.entities.legacy.User;
+import org.dmc.services.data.entities.legacy.unimplemented.CompanyImage;
+import org.dmc.services.data.entities.legacy.unimplemented.CompanyReview;
+import org.dmc.services.data.entities.legacy.unimplemented.CompanyReviewFlagged;
+import org.dmc.services.data.entities.legacy.unimplemented.CompanyReviewHelpful;
+import org.dmc.services.data.entities.legacy.unimplemented.CompanySkillImage;
 import org.dmc.services.data.models.legacy.FeatureImage;
 import org.dmc.services.logging.ServiceLogger;
 import org.dmc.services.utility.TestUserUtil;
