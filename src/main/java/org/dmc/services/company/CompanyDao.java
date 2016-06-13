@@ -18,10 +18,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.xml.ws.http.HTTPException;
 
+import static org.dmc.services.company.CompanyUserUtil.isASiteAdmin;
 import static org.dmc.services.company.CompanyUserUtil.isMemberOfCompany;
 
 public class CompanyDao {
@@ -176,7 +178,8 @@ public class CompanyDao {
 		Util util = Util.getInstance();
 		PreparedStatement statement;
 		String query;
-		long UnixTimeStamp = System.currentTimeMillis() / 1000L;
+		//long UnixTimeStamp = System.currentTimeMillis() / 1000L;
+		long UnixTimeStamp = Calendar.getInstance().getTime().getTime();
 		Timestamp timestamp = new java.sql.Timestamp(UnixTimeStamp);
 		Timestamp expires = new java.sql.Timestamp(UnixTimeStamp + (1000*60*60*24*365*10)); 
 		int id = -99999, commonAddressId = -9999, commonImageId = -9999;
@@ -184,6 +187,13 @@ public class CompanyDao {
 		int organizationMemberId = 1;
 
 		try {
+
+			// Check that the user creating the company is a site admin
+			if (!(isASiteAdmin(userEPPN))) {
+				ServiceLogger.log(logTag, "User " + userEPPN + " is not authorized to create company entities");
+				throw new HTTPException(HttpStatus.UNAUTHORIZED.value());
+			}
+
 			connection.setAutoCommit(false);
 			
 			// insert into relational common_address
@@ -481,15 +491,12 @@ public class CompanyDao {
 	    
 	    try {
 	    	
-			// Check that the user deleting the company video is an administrator or the owner of the company
-			/**
-			 ** Checks disabled until members for companies are tracked
-			if (!(isOwnerOfCompany(companyId, userIdEPPN) || isAdminOfCompany(companyId, userIdEPPN))) {
-				ServiceLogger.log(logTag, "User " + userEPPN + " is not authorized to delete videos for company " + companyId);
+			// Check that the user deleting the company is a site admin
+			if (!(isASiteAdmin(userEPPN))) {
+				ServiceLogger.log(logTag, "User " + userEPPN + " is not authorized to delete company entities for company id = " + companyId);
 				throw new HTTPException(HttpStatus.UNAUTHORIZED.value());
 			}
-			*/
-	    	
+
 	    	connection.setAutoCommit(false);
 	    	
 	        // retrieve relational common_address and common_image
@@ -646,37 +653,29 @@ public class CompanyDao {
 			userIdEPPN = UserDao.getUserID(userEPPN);
 			if (userIdEPPN == -1) {
 				ServiceLogger.log(logTag, "User " + userEPPN + " is not a valid user");
-				throw new HTTPException(HttpStatus.UNAUTHORIZED.value());
+				throw new HTTPException(HttpStatus.FORBIDDEN.value());
 			}
 
 			// Check that the user adding the administrator is an administrator or the owner
-			/**
-			 ** Checks disabled as of 3/31/2016 until members for companies are tracked
-			 **
 			if (!(CompanyUserUtil.isOwnerOfCompany(companyId, userIdEPPN) || CompanyUserUtil.isAdminOfCompany(companyId, userIdEPPN))) {
 				ServiceLogger.log(logTag, "User " + userEPPN + " is not authorized to add administrators for company " + companyId);
-				throw new HTTPException(HttpStatus.UNAUTHORIZED.value());
+				throw new HTTPException(HttpStatus.FORBIDDEN.value());
 			}
-			 */
 
 			// Check that the user being added as an administrator is a member of the company
-			/**
-			 ** Checks disabled as of 3/31/2016 until members for companies are tracked
-			 **
 			Id userOrganizationId =  this.getUserOrganizationId(companyId, userId);
 
 			if (userOrganizationId == null || userOrganizationId.getId() == -1) {
 				ServiceLogger.log(logTag, "User " + userId + " is not a member of company " + companyId);
-				throw new HTTPException(HttpStatus.UNAUTHORIZED.value());
+				throw new HTTPException(HttpStatus.FORBIDDEN.value());
 			}
-			 */
 
 			// Until checks are implemented, must ensure there is a record of user in OEGANIZATION_USER
 			// so that foreign key on ORGANIZATION_ADMIN is satisifed
-			Id userOrganizationId =  this.getUserOrganizationId(companyId, userId);
-			if (userOrganizationId == null || userOrganizationId.getId() == -1) {
-				userOrganizationId = addMember(companyId, userId, userEPPN);
-			}
+			//Id userOrganizationId =  this.getUserOrganizationId(companyId, userId);
+			//if (userOrganizationId == null || userOrganizationId.getId() == -1) {
+			//	userOrganizationId = addMember(companyId, userId, userEPPN);
+			//}
 
 			connection.setAutoCommit(false);
 
@@ -737,25 +736,20 @@ public class CompanyDao {
 			userIdEPPN = UserDao.getUserID(userEPPN);
 			if (userIdEPPN == -1) {
 				ServiceLogger.log(logTag, "User " + userEPPN + " is not a valid user");
-				throw new HTTPException(HttpStatus.UNAUTHORIZED.value());
+				throw new HTTPException(HttpStatus.FORBIDDEN.value());
 			}
 
-			/**
-			 /**
-			 ** Checks disabled as of 3/31/2016 until members for companies are tracked
-			 **
 			// Check that the user adding the administrator is an administrator or owner
 			if (!(CompanyUserUtil.isOwnerOfCompany(companyId, userIdEPPN) || CompanyUserUtil.isAdminOfCompany(companyId, userIdEPPN))) {
-				ServiceLogger.log(logTag, "User " + userEPPN + " is not authorized to add administrators for company " + companyId);
-				throw new HTTPException(HttpStatus.UNAUTHORIZED.value());
+				ServiceLogger.log(logTag, "User " + userEPPN + " is not authorized to add members for company " + companyId);
+				throw new HTTPException(HttpStatus.FORBIDDEN.value());
 			}
 
 			// Check that the user being added as a member is not already a member of the company
 			if (CompanyUserUtil.isMemberOfCompany(companyId, userId)) {
 				ServiceLogger.log(logTag, "User " + userId + " is already a member of comapny " + companyId);
-				throw new HTTPException(HttpStatus.UNAUTHORIZED.value());
+				throw new HTTPException(HttpStatus.FORBIDDEN.value());
 			}
-			 */
 
 			// Now add the user to the ORGANIZATION_USER table
 			Util util = Util.getInstance();
@@ -841,7 +835,7 @@ public class CompanyDao {
 		} catch (SQLException e) {
 			if (userIdEPPN == -1) {
 				ServiceLogger.log(logTag, "User " + userEPPN + " is not a valid user");
-				throw new HTTPException(HttpStatus.UNAUTHORIZED.value());
+				throw new HTTPException(HttpStatus.FORBIDDEN.value());
 			}
 		}
 
@@ -849,12 +843,12 @@ public class CompanyDao {
 		try {
 			if (!isMemberOfCompany(companyId, userIdEPPN)) {
 				ServiceLogger.log(logTag, "User " + userIdEPPN + " is not a member of comapny " + companyId);
-				throw new HTTPException(HttpStatus.UNAUTHORIZED.value());
+				throw new HTTPException(HttpStatus.FORBIDDEN.value());
 			}
 		} catch (SQLException e) {
 			if (userIdEPPN == -1) {
-				ServiceLogger.log(logTag, "User " + userEPPN + " is not a valid user");
-				throw new HTTPException(HttpStatus.UNAUTHORIZED.value());
+				ServiceLogger.log(logTag, "SQL Error while retrieving members: " + e.toString());
+				throw new HTTPException(HttpStatus.INTERNAL_SERVER_ERROR.value());
 			}
 		}
 
