@@ -47,27 +47,6 @@ public class CompanyUserUtil {
 		return results;
     }
 
-	/**
-	 *
-	 * @param companyId - Organization/Company for which to check memebership
-	 * @param owner - The logged-in user's username/EPPN
-	 * @return boolean
-	 * @throws SQLException
-	 */
-	public boolean isDMDIIMemberXX(int companyId, String owner) throws SQLException {
-		String query = "SELECT m.id FROM organization_dmdii_member m "
-				+ "JOIN organization o ON o.organization_id = m.organization_id "
-				+ "WHERE o.owner = ?"
-				+ "AND o.organization_id = ?";
-		PreparedStatement statement = DBConnector.prepareStatement(query);
-		statement.setString(1, owner);
-		statement.setInt(2, companyId);
-		ResultSet result = statement.executeQuery();
-		return result.isBeforeFirst();
-	}
-
-
-
 	public static Integer getUserId(String user) throws SQLException
     {
     	Integer results = null;
@@ -152,5 +131,17 @@ public class CompanyUserUtil {
 		return isOwner;
 	}
 
+	/**
+	 * Check that user is a site admin
+	 * @param userEPPN
+	 * @return
+	 * @throws SQLException
+	 */
+	static public boolean isASiteAdmin (String userEPPN) throws SQLException {
 
+		//TODO Need to implement mechanism for keeping track of site admins
+		// For now return true
+		return true;
+
+	}
 }
