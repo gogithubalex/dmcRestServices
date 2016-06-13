@@ -2,8 +2,6 @@ package org.dmc.services;
 
 import static org.junit.Assert.*;
 
-import java.util.UUID;
-
 import org.dmc.services.users.User;
 import org.json.JSONObject;
 import org.json.JSONArray;
@@ -13,7 +11,6 @@ import org.dmc.services.company.CompanyImage;
 import org.dmc.services.company.CompanyReview;
 import org.dmc.services.company.CompanyReviewFlagged;
 import org.dmc.services.company.CompanyReviewHelpful;
-import org.dmc.services.company.CompanySkill;
 import org.dmc.services.company.CompanySkillImage;
 import org.dmc.services.company.CompanyVideo;
 import org.dmc.services.utility.TestUserUtil;
@@ -32,7 +29,6 @@ import org.springframework.http.HttpStatus;
 import java.util.ArrayList;
 
 import static com.jayway.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.*;
 import static com.jayway.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 public class CompanyIT extends BaseIT {
@@ -72,16 +68,16 @@ public class CompanyIT extends BaseIT {
 	private String position = "1";
 	private String company_featuredId = "1";
 	private String serviceId = "1";
-	String randomEPPN = "fforgeadmin";
+	private String fforgeadminEPPN = "fforgeadmin";
 
 	@Before
 	public void testCompanyCreate() {
-		String json = createFixture();
+		String json = createFixture(fforgeadminEPPN);
 		ServiceLogger.log(logTag, "Creating company");
 		this.createdId =
 			given().
 				body(json).
-				header("AJP_eppn", randomEPPN).
+				header("AJP_eppn", fforgeadminEPPN).
 				header("Content-type", "application/json").
 			expect().
 				statusCode(200).
@@ -98,7 +94,7 @@ public class CompanyIT extends BaseIT {
 	@Test
 	public void testCompaniesGetJSON() {
 		if (this.createdId != null) {
-			given().header("Content-type", "application/json").header("AJP_eppn", randomEPPN).expect().statusCode(200)
+			given().header("Content-type", "application/json").header("AJP_eppn", fforgeadminEPPN).expect().statusCode(200)
 					.when().get(ALL_COMPANY_GET_RESOURCE).then()
 					.body(matchesJsonSchemaInClasspath("Schemas/companiesSchema.json")); // checks
 																							// JSON
@@ -113,14 +109,14 @@ public class CompanyIT extends BaseIT {
 		if (this.createdId != null) {
 		    Integer saveCreatedId = createdId;
 			ArrayList<Company> orginalCompanyList = given().header("Content-type", "application/json")
-					.header("AJP_eppn", randomEPPN).expect().statusCode(200).when().get(ALL_COMPANY_GET_RESOURCE)
+					.header("AJP_eppn", fforgeadminEPPN).expect().statusCode(200).when().get(ALL_COMPANY_GET_RESOURCE)
 					.as(ArrayList.class);
 
 			// add one company
 			testCompanyCreate();
 
 			ArrayList<Company> newCompanyList = given().header("Content-type", "application/json")
-					.header("AJP_eppn", randomEPPN).expect().statusCode(200).when().get(ALL_COMPANY_GET_RESOURCE)
+					.header("AJP_eppn", fforgeadminEPPN).expect().statusCode(200).when().get(ALL_COMPANY_GET_RESOURCE)
 					.as(ArrayList.class);
 
 			assertTrue("", newCompanyList.size() == orginalCompanyList.size() + 1);
@@ -138,7 +134,7 @@ public class CompanyIT extends BaseIT {
 			Company returnedCompany =
 			given().
 				header("Content-type", "application/json").
-				header("AJP_eppn", randomEPPN).
+				header("AJP_eppn", fforgeadminEPPN).
 			expect().
 				statusCode(200).  //HttpStatus.OK.value()
 			when().
@@ -166,7 +162,7 @@ public class CompanyIT extends BaseIT {
 		if (this.createdId != null) {
 			given().
 				header("Content-type", "application/json").
-				header("AJP_eppn", randomEPPN + "random").
+				header("AJP_eppn", fforgeadminEPPN + "random").
 			expect().
 				statusCode(403).
 			when().
@@ -179,7 +175,7 @@ public class CompanyIT extends BaseIT {
 		String json = updateFixture();
 		given().
 			body(json).
-			header("AJP_eppn", randomEPPN).
+			header("AJP_eppn", fforgeadminEPPN).
 			header("Content-type", "application/json").
 		expect().
 			statusCode(200).
@@ -194,7 +190,7 @@ public class CompanyIT extends BaseIT {
 		String json = updateFixture();
 		given().
 			body(json).
-			header("AJP_eppn", randomEPPN + "-random").
+			header("AJP_eppn", fforgeadminEPPN + "-random").
 			header("Content-type", "application/json").
 		expect().
 			statusCode(403).
@@ -211,7 +207,7 @@ public class CompanyIT extends BaseIT {
 			json.put("link", "test video link");
 			json.put("companyId", this.createdId);
 
-			given().header("Content-type", "application/json").header("AJP_eppn", randomEPPN).body(json.toString())
+			given().header("Content-type", "application/json").header("AJP_eppn", fforgeadminEPPN).body(json.toString())
 					.expect().statusCode(200).when().post(COMPANY_VIDEO_CREATE_RESOURCE).then()
 					.body(matchesJsonSchemaInClasspath("Schemas/idSchema.json")).extract().path("id");
 		}
@@ -230,7 +226,7 @@ public class CompanyIT extends BaseIT {
 			json.put("link", "test video link update");
 			json.put("companyId", this.createdId);
 
-			given().header("Content-type", "application/json").header("AJP_eppn", randomEPPN).body(json.toString())
+			given().header("Content-type", "application/json").header("AJP_eppn", fforgeadminEPPN).body(json.toString())
 					.expect().statusCode(200).when().patch(COMPANY_VIDEO_UPDATE_RESOURCE, videoId).then()
 					.body(matchesJsonSchemaInClasspath("Schemas/idSchema.json")).extract().path("id");
 		}
@@ -248,7 +244,7 @@ public class CompanyIT extends BaseIT {
 			json.put("link", "test video link update");
 			json.put("companyId", this.createdId);
 
-			given().header("Content-type", "application/json").header("AJP_eppn", randomEPPN + "-not-owner")
+			given().header("Content-type", "application/json").header("AJP_eppn", fforgeadminEPPN + "-not-owner")
 					.body(json.toString()).expect().statusCode(403).when()
 					.patch(COMPANY_VIDEO_UPDATE_RESOURCE, videoId);
 		}
@@ -261,7 +257,7 @@ public class CompanyIT extends BaseIT {
 
 		if (this.createdId != null) {
 			testCompanyVideoCreate();
-			JsonNode vs = given().header("Content-type", "application/json").header("AJP_eppn", randomEPPN).expect()
+			JsonNode vs = given().header("Content-type", "application/json").header("AJP_eppn", fforgeadminEPPN).expect()
 					.statusCode(200).when().get(COMPANY_VIDEOS_GET_RESOURCE, this.createdId).as(JsonNode.class);
 
 			try {
@@ -279,7 +275,7 @@ public class CompanyIT extends BaseIT {
 			testCompanyVideosGet();
 			if (this.videos != null && this.videos.size() > 0) {
 				int videoId = this.videos.get(0).getId();
-				given().header("Content-type", "application/json").header("AJP_eppn", randomEPPN).expect()
+				given().header("Content-type", "application/json").header("AJP_eppn", fforgeadminEPPN).expect()
 						.statusCode(200).when().delete(COMPANY_VIDEO_DELETE_RESOURCE, videoId).then()
 						.body(matchesJsonSchemaInClasspath("Schemas/idSchema.json"));
 			}
@@ -288,12 +284,12 @@ public class CompanyIT extends BaseIT {
 
 	@After
 	public void testCompanyDelete() {
-		given().header("Content-type", "application/json").header("AJP_eppn", randomEPPN).expect().statusCode(200)
+		given().header("Content-type", "application/json").header("AJP_eppn", fforgeadminEPPN).expect().statusCode(200)
 				.when().delete(COMPANY_DELETE_RESOURCE, this.createdId.toString()).then()
 				.body(matchesJsonSchemaInClasspath("Schemas/idSchema.json"));
 	}
 
-	public String createFixture() {
+	public String createFixture(String ownerEPPN) {
 		Company company = new Company();
 		
 //		company.setId(Integer.toString(id));
@@ -334,7 +330,7 @@ public class CompanyIT extends BaseIT {
 		company.setFollow(true);
 		company.setFavoritesCount(1002);
 		company.setIsOwner(false);
-		company.setOwner("test owner");
+		company.setOwner(ownerEPPN);
 		
 		ObjectMapper mapper = new ObjectMapper();
 		String companyJSONString = null;
@@ -425,8 +421,8 @@ public class CompanyIT extends BaseIT {
 	public void testCompanyGetMembers() {
 
 		// Add 2 members to the company
-		String user1 = addMember(randomEPPN, this.createdId);
-		String user2 = addMember(randomEPPN, this.createdId);
+		String user1 = addMember(fforgeadminEPPN, this.createdId);
+		String user2 = addMember(fforgeadminEPPN, this.createdId);
 
 		// Test get all members using the first member id
 		String user1_eppn = "userEPPN" + user1;
@@ -452,14 +448,14 @@ public class CompanyIT extends BaseIT {
 	public void testCompanyGetMembersNonMember() {
 
 		// Add 2 members to the company
-		String user1 = addMember(randomEPPN, this.createdId);
-		String user2 = addMember(randomEPPN, this.createdId);
+		String user1 = addMember(fforgeadminEPPN, this.createdId);
+		String user2 = addMember(fforgeadminEPPN, this.createdId);
 
 		String nonMemberEPPN = "testUser";
 
 		// testUser not a member of company, so expect to get 401 response
-		// (UNAUTHORIZED)
-		given().param("companyID", this.createdId.toString()).header("AJP_eppn", nonMemberEPPN).expect().statusCode(401)
+		// (FORBIDDEN)
+		given().param("companyID", this.createdId.toString()).header("AJP_eppn", nonMemberEPPN).expect().statusCode(org.apache.http.HttpStatus.SC_FORBIDDEN)
 				.when().get(COMPANY_GET_MEMBERS, this.createdId.toString());
 	}
 

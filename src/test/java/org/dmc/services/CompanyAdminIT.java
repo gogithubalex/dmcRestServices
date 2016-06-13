@@ -1,5 +1,6 @@
 package org.dmc.services;
 
+import org.apache.http.HttpStatus;
 import org.dmc.services.company.CompanyDao;
 import org.dmc.services.company.Company;
 import org.dmc.services.utility.TestUserUtil;
@@ -26,6 +27,10 @@ public class CompanyAdminIT  extends BaseIT {
     private static final String COMPANY_CREATE_RESOURCE = "/companies/create";
     private static final String COMPANY_ADD_ADMIN_RESOURCE = "/companies/{id}/admin/{userId}";
     private static final String COMPANY_ADD_MEMBER_RESOURCE = "/companies/{id}/member/{userId}";
+
+    private static final String COMPANY_UPDATE_RESOURCE = "/companies/{id}";
+    private static final String COMPANY_GET_RESOURCE = "/companies/{id}";
+
 
 
     private static final String logTag = CompanyAdminIT.class.getName();
@@ -182,10 +187,63 @@ public class CompanyAdminIT  extends BaseIT {
 		return companyJSONString;
     }
 
+    public String createUpdateCompanyFixture(String ownerName) {
+        Company company = new Company();
+
+        //		company.setId(Integer.toString(id));
+        company.setAccountId(Integer.toString(1001));
+        company.setName("update name");
+        company.setLocation("update location");
+        company.setDescription("update description");
+        company.setDivision("update division");
+        company.setIndustry("update industry");
+        company.setNAICSCode("update NAICSCode");
+        company.setRDFocus("update RDFocus");
+        company.setCustomers("update customers");
+        company.setAwardsReceived("update awardsReceived");
+        company.setTechnicalExpertise("update technicalExpertise");
+        company.setToolsSoftwareEquipmentMachines("update toolsSoftwareEquipmentMachines");
+        company.setPastCollaborations("update postCollaborations");
+        company.setPastProjects("update pastProjects");
+        company.setUpcomingProjectInterests("update upcomingProjectInterests");
+        company.setCollaborationInterests("update collaborationInterests");
+        company.setAddress("update address , update address");
+        company.setCity("update city");
+
+        // Todo:				company.setState(state);
+        // 		json.put("state", "update state");
+
+        company.setZipCode("update zipCode");
+        company.setTwitter("update twitter");
+        company.setLinkedIn("update linkedIn");
+        company.setWebsite("update website");
+        company.setMethodCommunication("update methodCommunication");
+        company.setEmail("update email");
+        company.setPhone("update phone");
+        company.setCategoryTier(30);
+        company.setDateJoined("update dateJoined");
+        company.setReasonJoining("update reasonJoining");
+        company.setFeatureImage(new FeatureImage("feature_image_thumb.jpg", "feature_image_large.jpg"));
+        company.setLogoImage("update logoImage");
+        company.setFollow(true);
+        company.setFavoritesCount(1002);
+        company.setIsOwner(false);
+        company.setOwner(ownerName);
+
+        ObjectMapper mapper = new ObjectMapper();
+        String companyJSONString = null;
+        try {
+            companyJSONString = mapper.writeValueAsString(company);
+        } catch (JsonProcessingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return companyJSONString;
+    }
+
     @Test
     public void testAddAdminSuccess () {
 
-        // Add to ORGANIZATION_ADMIN table
         given().
                 header("Content-type", "application/json").
                 header("AJP_eppn", ownerEPPN).
@@ -195,16 +253,13 @@ public class CompanyAdminIT  extends BaseIT {
 
     }
 
-    // This test ignored until since Checks for admins/members are disabled as of 3/31/2016 until members for companies are tracked
-    @Ignore
     @Test
     public void testAddAdminNonMember () {
 
-        // Add to ORGANIZATION_ADMIN table
         given().
                 header("Content-type", "application/json").
                 header("AJP_eppn", ownerEPPN).
-                expect().statusCode(401).  // UNAUTHORIZED
+                expect().statusCode(HttpStatus.SC_FORBIDDEN).  // FORBIDDEN
                 when().
                 post(COMPANY_ADD_ADMIN_RESOURCE, Integer.toString(companyId), Integer.toString(nonmemberUserId));
 
@@ -232,8 +287,6 @@ public class CompanyAdminIT  extends BaseIT {
 
     }
 
-    // This test ignored until since Checks for admins/members are disabled as of 3/31/2016 until members for companies are tracked
-    @Ignore
     @Test
     public void testAddMemberFailNonAdmin () {
 
@@ -250,10 +303,51 @@ public class CompanyAdminIT  extends BaseIT {
         given().
                 header("Content-type", "application/json").
                 header("AJP_eppn", nonmemberEPPN).
-                expect().statusCode(401).  // UNAUTHORIZED
+                expect().statusCode(HttpStatus.SC_FORBIDDEN).  // FORBIDDEN
                 when().
                 post(COMPANY_ADD_MEMBER_RESOURCE, Integer.toString(companyId), Integer.toString(memberUserId));
 
     }
 
+    @Test 
+    public void updateCompanyByAdmin () {
+        String json = createUpdateCompanyFixture(ownerEPPN);
+        given().
+                body(json).
+                header("AJP_eppn", ownerEPPN).
+                header("Content-type", "application/json").
+                expect().
+                statusCode(200).
+                when().
+                patch(COMPANY_UPDATE_RESOURCE, companyId).
+                then().
+                body(matchesJsonSchemaInClasspath("Schemas/idSchema.json"));
+
+        Company returnedCompany =
+                given().
+                        header("Content-type", "application/json").
+                        header("AJP_eppn", ownerEPPN).
+                        expect().
+                        statusCode(200).  //HttpStatus.OK.value()
+                        when().
+                        get(COMPANY_GET_RESOURCE, companyId).
+                        as(Company.class);
+
+        assertTrue("Expected to retrieve company with id = " + companyId, returnedCompany != null);
+        assertTrue("Expected division to contain string 'update'" + companyId, returnedCompany.getDivision().indexOf("update") >= 0);
+
+    }
+
+    @Test
+    public void updateCompanyByNonAdmin () {
+        String json = createUpdateCompanyFixture(ownerEPPN);
+        given().
+                body(json).
+                header("AJP_eppn", nonmemberEPPN).
+                header("Content-type", "application/json").
+                expect().
+                statusCode(HttpStatus.SC_FORBIDDEN).
+                when().
+                patch(COMPANY_UPDATE_RESOURCE, companyId);
+    }
 }
